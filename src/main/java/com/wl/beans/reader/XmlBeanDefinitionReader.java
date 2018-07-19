@@ -1,6 +1,7 @@
 package com.wl.beans.reader;
 
 import com.wl.beans.beanDef.BeanDefinition;
+import com.wl.beans.beanDef.BeanRefrence;
 import com.wl.beans.beanDef.PropertyValue;
 import com.wl.beans.resour.ResourceLoader;
 import org.w3c.dom.Document;
@@ -66,8 +67,14 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                 Element propertyEle=(Element)node;
                 String name = propertyEle.getAttribute("name");
                 String value = propertyEle.getAttribute("value");
-                if(value!=null){
+                if (value != null && !"".equals(value)) {
                     beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name,value));
+                } else {
+                    String ref = propertyEle.getAttribute("ref");
+                    if (ref != null) {
+                        BeanRefrence beanRefrence = new BeanRefrence(ref);
+                        beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanRefrence));
+                    }
                 }
             }
         }

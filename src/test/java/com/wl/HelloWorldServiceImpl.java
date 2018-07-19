@@ -6,9 +6,10 @@ package com.wl;
 public class HelloWorldServiceImpl implements HelloWorldService {
 
     private String text;
+    private OutputService outputService;
 
     public void helloWorld(){
-        System.out.println("hello world");
+        outputService.output(text);
     }
 
     public void setText(String text) {
@@ -16,4 +17,7 @@ public class HelloWorldServiceImpl implements HelloWorldService {
     }
 
 
+    public void setOutputService(OutputService outputService) {
+        this.outputService = outputService;
+    }
 }
