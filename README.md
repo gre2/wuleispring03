@@ -35,3 +35,10 @@
 9.通过AbstractBeanFactory中的ioc和beanName得到对象，构建BeanDefinition的bean属性
 10.AbstractApplicationContext通过name得到BeanDefinition的bean属性对象，执行方法
 ```
+7.处理ref
+```
+1.三个处理点
+2.创建BeanRefrence类，存储name
+3.XmlBeanDefinitionReader处理processProperty方法的时候，判断value是否有值，如果没有判断是否有ref，存在BeanRefrence
+4.AutowireCapableBeanFactory处理ioc容器的赋值的时候判断，判断对象是否属于BeanRefrence，如果属于，进行别的方式的赋值
+```
