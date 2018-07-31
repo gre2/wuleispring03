@@ -4,6 +4,7 @@
 
 >
 
+    <!--ioc-->
     <bean id="outputService" class="com.wl.OutputServiceImpl">
     </bean>
 
@@ -12,5 +13,13 @@
         <property name="outputService" ref="outputService"></property>
     </bean>
 
+    <!--aop-->
+    <bean id="timeInterceptor" class="com.wl.aop.TimerInterceptor"></bean>
 
+    <bean id="autoProxyCreator" class="com.wl.aop.parseProxy.AspectJAwareAdvisorAutoProxyCreator"></bean>
+
+    <bean id="aspectjAspect" class="com.wl.aop.advicePointcutExpression.AspectJExpressionPointcutAdvisor">
+        <property name="advice" ref="timeInterceptor"></property>
+        <property name="expression" value="execution(* com.wl.*.*(..))"></property>
+    </bean>
 </beans>

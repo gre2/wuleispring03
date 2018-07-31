@@ -4,7 +4,7 @@ import com.wl.beans.applica.ApplicationContext;
 import com.wl.beans.applica.ClassPathXmlApplicationContext;
 import org.junit.Test;
 
-public class TestApplication {
+public class TestIocApplication {
 
     @Test
     public void test() throws Exception {
