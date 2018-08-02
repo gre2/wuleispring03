@@ -24,6 +24,7 @@ public class AbstractBeanFactory implements BeanFactory {
         Object bean=definition.getBean();
         if(bean==null){
             bean = doCreateBean(definition);
+            //aop 产生代理对象
             bean = initializeBean(bean, name);
             definition.setBean(bean);
         }
@@ -44,7 +45,6 @@ public class AbstractBeanFactory implements BeanFactory {
     private Object doCreateBean(BeanDefinition definition) {
         try {
             Object bean=definition.getBeanClass().newInstance();
-            definition.setBean(bean);
             //之前doLoadDefinitions里面只是把对应关系存储在beanDefinition里面了，但是其实没有对每个属性赋值，此时赋值
             applyPropertyValues(definition);
             return bean;

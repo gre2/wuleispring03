@@ -6,9 +6,9 @@
 
 3.创建factory类
 
-4.创建reader类
+4.创建reader类(resource)
 
-5.创建application类
+5.创建application类(factory+definition)
 
 6.过程
 ```

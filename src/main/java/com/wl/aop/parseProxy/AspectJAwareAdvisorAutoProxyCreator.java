@@ -29,6 +29,7 @@ public class AspectJAwareAdvisorAutoProxyCreator implements BeanFactoryAware, Be
             return bean;
         }
 
+        //找到AspectJExpressionPointcutAdvisor的父类或者接口的集合
         List<AspectJExpressionPointcutAdvisor> advisors = abstractBeanFactory.getBeansForType(AspectJExpressionPointcutAdvisor.class);
         for (AspectJExpressionPointcutAdvisor advisor : advisors) {
             //判断bean.getClass是否在expression包范围
