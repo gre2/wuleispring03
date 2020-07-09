@@ -32,14 +32,15 @@ public class AspectJAwareAdvisorAutoProxyCreator implements BeanFactoryAware, Be
         //找到AspectJExpressionPointcutAdvisor的父类或者接口的集合
         List<AspectJExpressionPointcutAdvisor> advisors = abstractBeanFactory.getBeansForType(AspectJExpressionPointcutAdvisor.class);
         for (AspectJExpressionPointcutAdvisor advisor : advisors) {
-            //判断bean.getClass是否在expression包范围
             if (advisor.getPointcut().getClassFilter().matches(bean.getClass())) {
-                ProxyFactory proxyFactory = new ProxyFactory();
-                proxyFactory.setMethodInterceptor((MethodInterceptor) advisor.getAdvice());
-                proxyFactory.setMethodMatcher(advisor.getPointcut().getMethodMatcher());
-                TargetSource targetSource = new TargetSource(bean.getClass(), bean, bean.getClass().getInterfaces());
-                proxyFactory.setTargetSource(targetSource);
-                return proxyFactory.getProxy();
+                ProxyFactory advisedSupport = new ProxyFactory();
+                advisedSupport.setMethodInterceptor((MethodInterceptor) advisor.getAdvice());
+                advisedSupport.setMethodMatcher(advisor.getPointcut().getMethodMatcher());
+
+                TargetSource targetSource = new TargetSource( bean.getClass(),bean, bean.getClass().getInterfaces());
+                advisedSupport.setTargetSource(targetSource);
+
+                return advisedSupport.getProxy();
             }
         }
         return bean;
